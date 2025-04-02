@@ -10,7 +10,7 @@ public class PaintFrame extends JFrame {
 
     private final DrawingComponent canvas = new DrawingComponent();
 
-    private PencilTool pencilTool = new PencilTool();
+    private Tool tool = new LineTool();
 
     public PaintFrame() {
 
@@ -21,12 +21,14 @@ public class PaintFrame extends JFrame {
         setLayout(new BorderLayout());
         add(canvas, BorderLayout.CENTER);
 
+        canvas.setTool(tool);
+
         canvas.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 Graphics g = canvas.getImage().getGraphics();
                 g.setColor(Color.BLACK);
-                pencilTool.dragged(g, e.getX(), e.getY());
+                tool.dragged(g, e.getX(), e.getY());
                 canvas.repaint();
             }
 
@@ -46,7 +48,7 @@ public class PaintFrame extends JFrame {
             public void mousePressed(MouseEvent e) {
                 Graphics g = canvas.getImage().getGraphics();
                 g.setColor(Color.BLACK);
-                pencilTool.pressed(g, e.getX(), e.getY());
+                tool.pressed(g, e.getX(), e.getY());
                 canvas.repaint();
             }
 
@@ -54,7 +56,7 @@ public class PaintFrame extends JFrame {
             public void mouseReleased(MouseEvent e) {
                 Graphics g = canvas.getImage().getGraphics();
                 g.setColor(Color.BLACK);
-                pencilTool.released(g, e.getX(), e.getY());
+                tool.released(g, e.getX(), e.getY());
                 canvas.repaint();
             }
 

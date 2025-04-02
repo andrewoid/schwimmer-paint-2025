@@ -15,6 +15,8 @@ public class DrawingComponent extends JComponent {
             BufferedImage.TYPE_INT_RGB
     );
 
+    private Tool tool;
+
     public DrawingComponent() {
         // Set the image to be all white
         Graphics g = image.getGraphics();
@@ -27,9 +29,15 @@ public class DrawingComponent extends JComponent {
         super.paintComponent(g);
 
         g.drawImage(image, 0, 0, null);
+
+        tool.preview(g);
     }
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public void setTool(Tool tool) {
+        this.tool = tool;
     }
 }
