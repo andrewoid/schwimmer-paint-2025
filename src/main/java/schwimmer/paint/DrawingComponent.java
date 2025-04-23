@@ -19,7 +19,7 @@ public class DrawingComponent extends JComponent {
 
     public DrawingComponent() {
         // Set the image to be all white
-        Graphics g = image.getGraphics();
+        Graphics2D g = (Graphics2D) image.getGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0,0, image.getWidth(), image.getHeight());
     }
@@ -28,9 +28,11 @@ public class DrawingComponent extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawImage(image, 0, 0, null);
+        Graphics2D g2 = (Graphics2D) g;
 
-        tool.preview(g);
+        g2.drawImage(image, 0, 0, null);
+
+        tool.preview(g2);
     }
 
     public BufferedImage getImage() {

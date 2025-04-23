@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 
 public class PaintFrame extends JFrame {
 
@@ -26,7 +27,7 @@ public class PaintFrame extends JFrame {
         canvas.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                Graphics g = canvas.getImage().getGraphics();
+                Graphics2D g = (Graphics2D) canvas.getImage().getGraphics();
                 g.setColor(Color.BLACK);
                 tool.dragged(g, e.getX(), e.getY());
                 canvas.repaint();
@@ -46,15 +47,16 @@ public class PaintFrame extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                Graphics g = canvas.getImage().getGraphics();
+                BufferedImage image = canvas.getImage();
+                Graphics2D g = (Graphics2D) image.getGraphics();
                 g.setColor(Color.BLACK);
-                tool.pressed(g, e.getX(), e.getY());
+                tool.pressed(image, g, e.getX(), e.getY());
                 canvas.repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                Graphics g = canvas.getImage().getGraphics();
+                Graphics2D g = (Graphics2D) canvas.getImage().getGraphics();
                 g.setColor(Color.BLACK);
                 tool.released(g, e.getX(), e.getY());
                 canvas.repaint();
